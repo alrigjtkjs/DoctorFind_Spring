@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="fd.md.mapper.MemberMapper">
+	<insert id="signup" parameterType="Member">
+		insert into MEMBER values(MEMBER_SEQ.nextval, #{name}, #{email}, #{pw}, #{phone_num}, #{addr}, SYSDATE)
+	</insert>
+	<select id="loginok" resultType="Member" parameterType="String">
+		select * from MEMBER where email=#{email}
+	</select>
+	<update id="updateok" parameterType="String">
+		update MEMBER set phone_num=#{phone_num}, pw=#{pw}, addr=#{addr} where email=#{email}
+	</update>
+</mapper>
+	

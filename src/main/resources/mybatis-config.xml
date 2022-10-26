@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+
+  <typeAliases>
+  	<typeAlias alias="Member" type="fd.md.domain.Member"/>
+  	<typeAlias alias="Board" type="fd.md.domain.Board"/>
+  	<typeAlias alias="Hospital" type="fd.md.domain.Hospital"/>
+  	<typeAlias alias="PagingVo" type="fd.md.domain.PagingVo"/>
+  	<typeAlias alias="SearchListResult" type="fd.md.domain.SearchListResult"/>
+  	<typeAlias alias="Search" type="fd.md.domain.Search"/>
+  	<typeAlias alias="Healthinfo" type="fd.md.domain.Healthinfo"/>
+  	<typeAlias alias="Event" type="fd.md.domain.Event"/>
+  	<typeAlias alias="Book" type="fd.md.domain.Book"/>
+  </typeAliases>
+
+</configuration>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="fd.md.mapper.SearchMapper"> 
+  	<!-- 전체 리스트 -->
+  	<select id="list" resultType="Hospital">
+	    select * from HOSPITAL where num between 1 and 20 order by num
+	</select>
+	<!-- 페이징처리된 리스트 -->
+	<select id="selectPerPage" resultType="Hospital" parameterType="PagingVo">
+	     <![CDATA[
+	     select * from (select ROWNUM rnum, aa.* from (select * from HOSPITAL order by NUM) aa)
+	     where rnum>#{startRow} and rnum<=#{endRow}
+	     ]]>
+	</select>
+	<!-- 총 행 개수 -->
+	<select id="selectCount" resultType="long">
+	     select max(ROWNUM) from HOSPITAL
+	</select>
+	<!-- 병원 이름&주소 검색 -->
+	<select id="selectNameAddr" resultType="Hospital" parameterType="PagingVo">
+	     <![CDATA[
+	     select * from (select ROWNUM rnum, aa.* 
+	     from (select * from HOSPITAL where HOSNAME like '%'||#{hosname,jdbcType=VARCHAR}||'%' and ADDR like '%'||#{addr,jdbcType=VARCHAR}||'%' order by HOSNAME) aa) 
+	     where rnum>#{startRow} and rnum<=#{endRow}
+	     ]]>
+	</select>
+	<!-- 병원 이름&주소 검색했을때 행 개수 -->
+	<select id="selectCountByNameAddr" resultType="long" parameterType="PagingVo">
+	     select nvl(max(ROWNUM),0) from HOSPITAL where HOSNAME like '%'||#{hosname}||'%' and ADDR like '%'||#{addr}||'%'
+	</select>
+	
+	<select id="maplist" resultType="Search">
+  	 <![CDATA[
+	    select hosname, addr, xpoint, ypoint from HOSPITAL where hosname LIKE '%'||#{rstr}||'%' and NOT xpoint=0.0 and NOT ypoint=0.0 order by hosname 
+	    ]]>
+	</select>
+	
+</mapper>
